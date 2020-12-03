@@ -48,7 +48,6 @@ temp 3, 374
 }
 function glassex(){
 return `#Example script showing how to make 20 vials of water for quickly producing glass
-#Adjust
 
 #Load slot 1 with 100 water, or anything else
 

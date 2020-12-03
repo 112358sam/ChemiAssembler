@@ -3,9 +3,9 @@
 <body>
 
 <h1>ChemiAssembler</h1>
-<h2>Human readible code to chemfuck converter.</h2>
+<h2>Human readible code to chemf*** converter.</h2>
 
-<textarea id="input_code" name="input_box" rows="40" cols="150">
+<textarea id="input_code" name="input_box" rows="30" cols="120">
     #Compiles code written in an assembly-like language into chemfuck for spacestation13 goonstation
 
     ##Version 1: No input code and only simple for-loop, no while-loop or true for, this allows variables to be completely hidden
@@ -34,14 +34,15 @@
 </textarea>
 <br><br>
 <button onclick="convert()">Submit</button>
-
-<p id="output"></p>
+<br><br>
+<textarea id="output" name="output_box" rows="5" cols="50" onclick="this.focus();this.select()" readonly="readonly">
+</textarea>
 
 <script src="./assembler.js"></script>
 <script>
 function convert(){
     var intext = document.getElementById("input_code").value;
-    console.log(intext);
+    //console.log(intext);
     var outtext = assembler(intext);
     document.getElementById("output").innerHTML = outtext;
 }

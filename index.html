@@ -150,7 +150,7 @@
           
         var fr=new FileReader(); 
         fr.onload=function(){ 
-            document.getElementById('input_code').innerHTML=fr.result; 
+            document.getElementById('input_code').textContent=fr.result; 
         } 
         fr.readAsText(this.files[0]); 
     }) 
@@ -159,19 +159,23 @@
 <script>
     function  salt(){
         var outtext = saltex();
-        document.getElementById("input_code").innerHTML = outtext;
+        document.getElementById("input_code").textContent = outtext;
+        document.getElementById("input_code").value = outtext;
     }
     function charcoal1(){
         var outtext = char1ex();
-        document.getElementById("input_code").innerHTML = outtext;
+        document.getElementById("input_code").textContent = outtext;
+        document.getElementById("input_code").value = outtext;
     }
     function charcoal2(){
         var outtext = char2ex();
-        document.getElementById("input_code").innerHTML = outtext;
+        document.getElementById("input_code").textContent = outtext;
+        document.getElementById("input_code").value = outtext;
     }
     function glass(){
         var outtext = glassex();
-        document.getElementById("input_code").innerHTML = outtext;
+        document.getElementById("input_code").textContent = outtext;
+        document.getElementById("input_code").value = outtext;
     }
 </script>
 
@@ -180,7 +184,7 @@
 function convert(){
     var intext = document.getElementById("input_code").value;
     var outtext = assembler(intext);
-    document.getElementById("output").innerHTML = outtext;
+    document.getElementById("output").textContent = outtext;
 }
 </script>
 

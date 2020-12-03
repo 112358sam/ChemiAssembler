@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>ChemiAssembler</h1>
+<h2>Human readible code to chemfuck converter.</h2>
+
+<textarea id="input_code" name="input_box" rows="40" cols="150">
+    #Compiles code written in an assembly-like language into chemfuck for spacestation13 goonstation
+
+    ##Version 1: No input code and only simple for-loop, no while-loop or true for, this allows variables to be completely hidden
+    
+    #Notes: 
+    #	Number inputs are indicated with # followed by a number. So in code you should replace #s with just the number of the source 
+    #	The code ignroes letter case and white space.
+    #	new lines are used to indicate the next command
+    #	comments begin with # just like python, however they must be on their own line
+    #	The current version only checks for some syntax errors
+    #   values must be separated by commas
+    
+    ##commands
+    #mov #a, #s, #t      moves #a amount from #s source container number to #t target container
+    #temp #s, #v         sets the temperature of #s source to #v value
+    #iso #a, #r, #s, #t  isolates #a amount of #r reagent from #s source to #t target
+    #pill #s             makes the contents of #s into pills. Identical to mov-ing the contents to 11
+    #vial #s             makes the contents of #s into vials. Identical to mov-ing the contents to 12
+    #dump #s             dumps the contents of #s. Identical to mov-ing the contents to 13
+    #compile             this line anywhere in the code indicates that the resulting program should have ~ appended
+    #print #text        prints text (this adds a lot of code to the output)
+    
+    #loops
+    #sfor #i             simple for loop, iterates the code below until end #i times. If #i <= 0 the code is skipped
+    #end                 markes the end of a loop
+</textarea>
+<br><br>
+<button onclick="convert()">Submit</button>
+
+<p id="output"></p>
+
+<script src="./assembler.js"></script>
+<script>
+function convert(){
+    var intext = document.getElementById("input_code").value;
+    //console.log(intext);
+    var outtext = assembler(intext);
+    document.getElementById("output").innerHTML = outtext;
+}
+</script>
+
+</body>
+</html>

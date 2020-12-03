@@ -1,43 +1,122 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemiAssembler - Chemfuck Compiler</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
 <body>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <h1>ChemiAssembler</h1>
+                <h3>Human readible code to chemfuck compiler.</h3>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <div class="callout">
+                    <h4>Overview</h4>
+                    <p>Introductory Text</p>
+                    <ul class="accordion" data-accordion data-allow-all-closed="true">
+                        <li class="accordion-item is-active" data-accordion-item>
+                            <!-- Accordion tab title -->
+                            <a href="#" class="accordion-title">API - Click to show/hide</a>
+                        
+                            <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+                            <div class="accordion-content" data-tab-content>
+                                <h5>Notes</h5>
+                                <ul>
+                                    <li>Number inputs are indicated with # followed by a letter. In code you should replace #s with just the number of the source</li>
+                                    <li>The code ignores letter case and white space excluding the print command.</li>
+                                    <li>Comments begin with # just like python, however they must be on their own line.</li>
+                                    <li>The current version only checks for some syntax errors.</li>
+                                    <li>Values must be separated by commas.</li>
+                                </ul>
+                                <h5>Commands</h5>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th width="150">Command</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>mov #a, #s, #t</td>
+                                            <td>moves #a amount from #s source container number to #t target container</td>
+                                        </tr>
+                                        <tr>
+                                            <td>temp #s, #v</td>
+                                            <td>sets the temperature of #s source to #v value</td>
+                                        </tr>
+                                        <tr>
+                                            <td>iso #a, #r, #s, #t</td>
+                                            <td>isolates #a amount of #r reagent from #s source to #t target</td>
+                                        </tr>
+                                        <tr>
+                                            <td>pill #s</td>
+                                            <td>makes the contents of #s into pills. Identical to mov-ing the contents to 11</td>
+                                        </tr>
+                                        <tr>
+                                            <td>vial #s</td>
+                                            <td>makes the contents of #s into vials. Identical to mov-ing the contents to 12</td>
+                                        </tr>
+                                        <tr>
+                                            <td>dump #s</td>
+                                            <td>dumps the contents of #s. Identical to mov-ing the contents to 13</td>
+                                        </tr>
+                                        <tr>
+                                            <td>compile</td>
+                                            <td>this line anywhere in the code indicates that the resulting program should have ~ appended</td>
+                                        </tr>
+                                        <tr>
+                                            <td>print #text</td>
+                                            <td>prints #text to the ChemiCompiler screen (this adds a lot of code to the output)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>sfor #i</td>
+                                            <td>simple for loop, iterates the code below until end #i times. If #i <= 0 the code is skipped</td>
+                                        </tr>
+                                        <tr>
+                                            <td>end</td>
+                                            <td>markes the end of a loop</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--Input text area-->
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <div class="callout">
+                    <h4>Input Code</h4>
+                    <textarea id="input_code" name="input_box" rows="15"  placeholder="Enter your code here" ></textarea>
+                    <a href="#" class="button" onclick="convert()">Compile</a>
+                </div>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="large-12 cell">
+                <div class="callout">
+                    <h4>Output Code</h4>
+                    <textarea id="output" name="output_box" rows="1"  placeholder="Compiled code appears here" onclick="this.focus();this.select()" readonly="readonly"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>  
 
-<h1>ChemiAssembler</h1>
-<h2>Human readible code to chemf*** converter.</h2>
 
-<textarea id="input_code" name="input_box" rows="30" cols="120">
-    #Compiles code written in an assembly-like language into chemfuck for spacestation13 goonstation
 
-    ##Version 1: No input code and only simple for-loop, no while-loop or true for, this allows variables to be completely hidden
-    
-    #Notes: 
-    #	Number inputs are indicated with # followed by a number. So in code you should replace #s with just the number of the source 
-    #	The code ignroes letter case and white space.
-    #	new lines are used to indicate the next command
-    #	comments begin with # just like python, however they must be on their own line
-    #	The current version only checks for some syntax errors
-    #   values must be separated by commas
-    
-    ##commands
-    #mov #a, #s, #t      moves #a amount from #s source container number to #t target container
-    #temp #s, #v         sets the temperature of #s source to #v value
-    #iso #a, #r, #s, #t  isolates #a amount of #r reagent from #s source to #t target
-    #pill #s             makes the contents of #s into pills. Identical to mov-ing the contents to 11
-    #vial #s             makes the contents of #s into vials. Identical to mov-ing the contents to 12
-    #dump #s             dumps the contents of #s. Identical to mov-ing the contents to 13
-    #compile             this line anywhere in the code indicates that the resulting program should have ~ appended
-    #print #text        prints text (this adds a lot of code to the output)
-    
-    #loops
-    #sfor #i             simple for loop, iterates the code below until end #i times. If #i <= 0 the code is skipped
-    #end                 markes the end of a loop
-</textarea>
-<br><br>
-<button onclick="convert()">Submit</button>
-<br><br>
-<textarea id="output" name="output_box" rows="5" cols="50" onclick="this.focus();this.select()" readonly="readonly">
-</textarea>
 
+<!--Where the sausage is made-->
 <script src="./assembler.js"></script>
 <script>
 function convert(){
@@ -47,6 +126,12 @@ function convert(){
     document.getElementById("output").innerHTML = outtext;
 }
 </script>
+
+<!--Load Foundation JS-->
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/what-input.js"></script>
+<script src="js/vendor/foundation.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

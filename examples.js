@@ -1,6 +1,5 @@
 function saltex(){
-return `
-#Example script showing the basic mov operation
+return `#Example script showing the basic mov operation
 #Makes 66 salt
 
 #Load slot 1 with 33+ water
@@ -14,8 +13,7 @@ mov 33, 3, 4
 `
 }
 function char1ex(){
-return `
-#Example script showing how to make charcoal from only basic ingredients
+return `#Example script showing how to make charcoal from only basic ingredients
 #Makes 100 charcoal
 
 #Load slot 1 with 50+ paper
@@ -35,8 +33,7 @@ temp 5, 374
 `
 }
 function char2ex(){
-return `
-#Example script showing how to make charcoal with chemgroup inputs
+return `#Example script showing how to make charcoal with chemgroup inputs
 #Makes 100 charcoal
 
 #Load slot 1 with 50+ paper
@@ -50,8 +47,7 @@ temp 3, 374
 `
 }
 function glassex(){
-return `
-#Example script showing how to make 20 vials of water for quickly producing glass
+return `#Example script showing how to make 20 vials of water for quickly producing glass
 #Adjust
 
 #Load slot 1 with 100 water, or anything else

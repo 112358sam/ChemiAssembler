@@ -12,11 +12,12 @@
 
 ////commands
 //mov #a, #s, #t      moves #a amount from #s source container number to #t target container
+//movall #s, #t       moves all the contents of #s source container number to #t target container
 //temp #s, #v         sets the temperature of #s source to #v value
 //iso #a, #r, #s, #t  isolates #a amount of #r reagent from #s source to #t target
-//pill #s             makes the contents of #s into pills. Identical to mov-ing the contents to 11
-//vial #s             makes the contents of #s into vials. Identical to mov-ing the contents to 12
-//dump #s             dumps the contents of #s. Identical to mov-ing the contents to 13
+//pill #s             makes the contents of #s into pills. Identical to movall-ing the contents to 11
+//vial #s             makes the contents of #s into vials. Identical to movall-ing the contents to 12
+//dump #s             dumps the contents of #s. Identical to movall-ing the contents to 13
 //compile             this line anywhere in the code indicates that the resulting program should have ~ appended
 //print <text>        prints text. Ignores starting and ending whitespace
 
@@ -41,7 +42,7 @@ function assembler(intext) {
 	let origlines = intext.split("\n");
 	
 	//List of known commands
-	let vncoms = ['mov','temp','iso','pill','vial','dump','sfor'];
+	let vncoms = ['mov','movall','temp','iso','pill','vial','dump','sfor'];
 	let vcoms = ['compile','end'];
 	
 	let lines = new Array(origlines.length);
@@ -62,8 +63,24 @@ function assembler(intext) {
 		//Commands with numbers
 		else if (vncoms.some(v => line.includes(v))) {
 			
+			
+			//MOVALL command
+			if (line.substring(0,6) == 'movall'){
+				let vals = line.substring(6).split(',');
+				
+				let tx = Number(vals[1]);
+				app = settx(tx);
+				fck += app;
+
+				let sx = Number(vals[0]);
+				app = setsx(sx);
+				regs[3] = regs[1];
+				app += prepnum(sx)
+				fck += app+',@';
+			}
+
 			//MOV command
-			if (line.substring(0,3) == 'mov'){
+			else if (line.substring(0,3) == 'mov'){
 				let vals = line.substring(3).split(',');
 				
 				let ax = Number(vals[0]);
@@ -78,7 +95,7 @@ function assembler(intext) {
 				app = settx(tx);
 				fck += app+'@';
 			}
-			
+
 			//TEMP command
 			else if (line.substring(0,4) == 'temp'){
 				let vals = line.substring(4).split(',');
@@ -133,6 +150,7 @@ function assembler(intext) {
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
 				regs[3] = regs[1];
+				app += prepnum(sx)
 				fck += app+',@';
 			}
 			
@@ -144,6 +162,7 @@ function assembler(intext) {
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
 				regs[3] = regs[1];
+				app += prepnum(sx)
 				fck += app+',@';
 			}
 			
@@ -155,6 +174,7 @@ function assembler(intext) {
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
 				regs[3] = regs[1];
+				app += prepnum(sx)
 				fck += app+',@';
 			}
 			

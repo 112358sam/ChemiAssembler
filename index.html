@@ -20,7 +20,7 @@
             <div class="large-12 cell">
                 <div class="callout">
                     <h4>Overview</h4>
-                    <p>Introductory Text</p>
+                    <p>This tool builds </p>
                     <ul class="accordion" data-accordion data-allow-all-closed="true">
                         <li class="accordion-item is-active" data-accordion-item>
                             <!-- Accordion tab title -->
@@ -47,7 +47,11 @@
                                     <tbody>
                                         <tr>
                                             <td>mov #a, #s, #t</td>
-                                            <td>moves #a amount from #s source container number to #t target container</td>
+                                            <td>moves #a amount from #s source container to #t target container</td>
+                                        </tr>
+                                        <tr>
+                                            <td>movall #s, #t</td>
+                                            <td>moves all the contents of #s source container to #t target container</td>
                                         </tr>
                                         <tr>
                                             <td>temp #s, #v</td>
@@ -59,15 +63,15 @@
                                         </tr>
                                         <tr>
                                             <td>pill #s</td>
-                                            <td>makes the contents of #s into pills. Identical to mov-ing the contents to 11</td>
+                                            <td>makes the contents of #s into pills. Identical to movall-ing the contents to 11</td>
                                         </tr>
                                         <tr>
                                             <td>vial #s</td>
-                                            <td>makes the contents of #s into vials. Identical to mov-ing the contents to 12</td>
+                                            <td>makes the contents of #s into vials. Identical to movall-ing the contents to 12</td>
                                         </tr>
                                         <tr>
                                             <td>dump #s</td>
-                                            <td>dumps the contents of #s. Identical to mov-ing the contents to 13</td>
+                                            <td>dumps the contents of #s. Identical to movall-ing the contents to 13</td>
                                         </tr>
                                         <tr>
                                             <td>compile</td>
@@ -97,8 +101,29 @@
         <div class="grid-x grid-padding-x">
             <div class="large-12 cell">
                 <div class="callout">
-                    <h4>Input Code</h4>
-                    <textarea id="input_code" name="input_box" rows="15"  placeholder="Enter your code here" ></textarea>
+                    <div class="grid-x grid-padding-x">
+                        <div class="large-12 cell">
+                            <h4>Example Scripts</h4>
+                            <div class="grid-x grid-padding-x">
+                                <div class="large-12 cell">
+                                    <div class="button-group">
+                                        <a class="button" onclick="salt()">Salt</a>
+                                        <a class="button" onclick="charcoal1()">Charcoal w/o chemgroups</a>
+                                        <a class="button" onclick="charcoal2()">Charcoal w/ chemgroups</a>
+                                        <a class="button" onclick="glass()">Glass Vials</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-4 medium-4 cell">
+                            <h4>Input Code</h4>
+                        </div>
+                        <div class="large-8 medium-8 cell">
+                            <label for="upload_button" class="button float-right">Upload File</label>
+                            <input type="file" id="upload_button" class="show-for-sr">
+                        </div>      
+                    </div>
+                    <textarea id="input_code" name="input_box" rows="15"  placeholder="Enter your code here" spellcheck="false"></textarea>
                     <a href="javascript:void()" class="button" onclick="convert()">Compile</a>
                 </div>
             </div>
@@ -107,26 +132,58 @@
             <div class="large-12 cell">
                 <div class="callout">
                     <h4>Output Code</h4>
-                    <textarea id="output" name="output_box" rows="1"  placeholder="Compiled code appears here" onclick="this.focus();this.select()" readonly="readonly"></textarea>
+                    <textarea id="output" name="output_box" rows="1" onclick="this.focus();this.select()" readonly="readonly" spellcheck="false"></textarea>
+                    <label>Copy and paste the text in the box above into the ChemiCompiler</label>
                 </div>
             </div>
         </div>
     </div>  
 
 
+<!--File upload script-->
+<!--Code shamelessly copied from Shreyasi_Chakraborty's article https://www.geeksforgeeks.org/how-to-read-a-local-text-file-using-javascript/-->
+<script type="text/javascript"> 
+    document.getElementById('upload_button') 
+        .addEventListener('change', function() { 
+          
+        var fr=new FileReader(); 
+        fr.onload=function(){ 
+            document.getElementById('input_code').innerHTML=fr.result; 
+        } 
+        fr.readAsText(this.files[0]); 
+    }) 
+</script> 
 
+<script>
+    function  salt(){
+        var outtext = saltex();
+        document.getElementById("input_code").innerHTML = outtext;
+    }
+    function charcoal1(){
+        var outtext = char1ex();
+        document.getElementById("input_code").innerHTML = outtext;
+    }
+    function charcoal2(){
+        var outtext = char2ex();
+        document.getElementById("input_code").innerHTML = outtext;
+    }
+    function glass(){
+        var outtext = glassex();
+        document.getElementById("input_code").innerHTML = outtext;
+    }
+</script>
 
 <!--Where the sausage is made-->
-<script src="./assembler.js"></script>
 <script>
 function convert(){
     var intext = document.getElementById("input_code").value;
-    //console.log(intext);
     var outtext = assembler(intext);
     document.getElementById("output").innerHTML = outtext;
 }
 </script>
 
+<script src="./examples.js"></script>
+<script src="./assembler.js"></script>
 <!--Load Foundation JS-->
 <script src="js/vendor/jquery.js"></script>
 <script src="js/vendor/what-input.js"></script>

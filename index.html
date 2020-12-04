@@ -108,6 +108,7 @@
                             <div class="grid-x grid-padding-x">
                                 <div class="large-12 cell">
                                     <div class="button-group">
+                                        <a class="button" onclick="helloworld()">Hello World!</a>
                                         <a class="button" onclick="salt()">Salt</a>
                                         <a class="button" onclick="charcoal1()">Charcoal w/o chemgroups</a>
                                         <a class="button" onclick="charcoal2()">Charcoal w/ chemgroups</a>
@@ -157,6 +158,11 @@
 </script> 
 
 <script>
+    function  helloworld(){
+        var outtext = helloex();
+        document.getElementById("input_code").textContent = "print Hello World!";
+        document.getElementById("input_code").value = "print Hello World!";
+    }
     function  salt(){
         var outtext = saltex();
         document.getElementById("input_code").textContent = outtext;
@@ -187,7 +193,7 @@ function convert(){
     document.getElementById("output").textContent = outtext;
 }
 </script>
-
+<!--Load my JS files-->
 <script src="./examples.js"></script>
 <script src="./assembler.js"></script>
 <!--Load Foundation JS-->

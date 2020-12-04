@@ -41,7 +41,7 @@ return `#Example script showing how to make charcoal with chemgroup inputs
 #Load slot 3 with an empty beaker
 
 temp 1, 424
-mov 75, 2, 3
+mov 50, 2, 3
 mov 50, 1, 3
 temp 3, 374 
 `

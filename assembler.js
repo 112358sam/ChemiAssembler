@@ -61,7 +61,7 @@ function assembler(intext) {
 		if (!line || line.charAt(0)=='#'){ continue; }
 		
 		//Commands with numbers
-		else if (vncoms.some(v => line.includes(v))) {
+		else if (vncoms.some(v => line.startsWith(v))) {
 			
 			
 			//MOVALL command

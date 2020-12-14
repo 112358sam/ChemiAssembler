@@ -57,3 +57,21 @@ mov 5, 1, 12
 end
 `
 }
+function isoex(){
+return `#This script isolates up to 10 reagents into separate beakers.
+#Load slot 1 with a beaker of mixed reagents.
+#Load slots 2 through 10 with beakers to hold the separated reagents.
+#You only need as many empty beakers as one less than the number of reagents in beaker 1.
+#Slot 1 will retain the first reagent and anything after the 10th.
+#Subsequent slots will hold each following reagent.
+
+iso 100, 2, 1, 2
+iso 100, 2, 1, 3
+iso 100, 2, 1, 4
+iso 100, 2, 1, 5
+iso 100, 2, 1, 6
+iso 100, 2, 1, 7
+iso 100, 2, 1, 8
+iso 100, 2, 1, 9
+iso 100, 2, 1, 10`
+}

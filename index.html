@@ -113,6 +113,7 @@
                                         <a class="button" onclick="charcoal1()">Charcoal w/o chemgroups</a>
                                         <a class="button" onclick="charcoal2()">Charcoal w/ chemgroups</a>
                                         <a class="button" onclick="glass()">Glass Vials</a>
+                                        <a class="button" onclick="iso()">Isolate Reagents</a>
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +180,11 @@
     }
     function glass(){
         var outtext = glassex();
+        document.getElementById("input_code").textContent = outtext;
+        document.getElementById("input_code").value = outtext;
+    }
+    function iso(){
+        var outtext = isoex();
         document.getElementById("input_code").textContent = outtext;
         document.getElementById("input_code").value = outtext;
     }

@@ -74,7 +74,7 @@ function assembler(intext) {
 
 				let sx = Number(vals[0]);
 				app = setsx(sx);
-				regs[3] = regs[1];
+				regs[3] = -1;
 				app += prepnum(sx)
 				fck += app+',@';
 			}
@@ -149,7 +149,7 @@ function assembler(intext) {
 				
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
-				regs[3] = regs[1];
+				regs[3] = -1;
 				app += prepnum(sx)
 				fck += app+',@';
 			}
@@ -161,7 +161,7 @@ function assembler(intext) {
 				
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
-				regs[3] = regs[1];
+				regs[3] = -1;
 				app += prepnum(sx)
 				fck += app+',@';
 			}
@@ -173,7 +173,7 @@ function assembler(intext) {
 				
 				let sx = Number(line.substring(4));
 				app = setsx(sx);
-				regs[3] = regs[1];
+				regs[3] = -1;
 				app += prepnum(sx)
 				fck += app+',@';
 			}

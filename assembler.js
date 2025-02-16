@@ -20,6 +20,7 @@
 //dump #s             dumps the contents of #s. Identical to movall-ing the contents to 13
 //compile             this line anywhere in the code indicates that the resulting program should have ~ appended
 //print <text>        prints text. Ignores starting and ending whitespace
+//wait #t             waits t 'time units.' This is just the number of NOP operations to perform 
 
 ////loops
 //sfor #i             simple for loop, iterates the code below until end #i times. If #i <= 0 the code is skipped
@@ -42,7 +43,7 @@ function assembler(intext) {
 	let origlines = intext.split("\n");
 	
 	//List of known commands
-	let vncoms = ['mov','movall','temp','iso','pill','vial','dump','sfor'];
+	let vncoms = ['mov','movall','temp','iso','pill','vial','dump','sfor','wait'];
 	let vcoms = ['compile','end'];
 	
 	let lines = new Array(origlines.length);
@@ -177,6 +178,12 @@ function assembler(intext) {
 				app += prepnum(sx)
 				fck += app+',@';
 			}
+
+			//WAIT command
+			else if (line.substring(0,4) == 'wait'){
+				let count = Number(line.substring(4));
+				fck += '*'.repeat(count)
+			}
 			
 			//SFOR loop
 			else if (line.substring(0,4) == 'sfor'){
@@ -185,10 +192,15 @@ function assembler(intext) {
 				let endind = lines.indexOf('end',iter);
 				let numblist = [];
 				for (let subind = iter; subind<endind; subind++){
+					//Temp needs to be adjusted for Kelvin
 					if (lines[subind].substring(0,4) == 'temp'){
 						let temp = Number(lines[subind].substring(4));
 						numblist.push(Math.abs(273-temp));
+					} else if (lines[subind].substring(0,4) == 'wait'){
+						//Wait does not use numbers, it just repeats itself
+						continue
 					} else {
+						//Save numbers to list to be written before loop
 						numblist = numblist.concat(lines[subind].match(/\d+/g));
 					}
 				}

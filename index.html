@@ -118,9 +118,8 @@
                                     <div class="button-group">
                                         <a class="button" onclick="helloworld()">Hello World!</a>
                                         <a class="button" onclick="salt()">Salt</a>
-                                        <a class="button" onclick="charcoal1()">Charcoal w/o chemgroups</a>
-                                        <a class="button" onclick="charcoal2()">Charcoal w/ chemgroups</a>
-                                        <a class="button" onclick="glass()">Glass Vials</a>
+                                        <a class="button" onclick="charcoal()">Charcoal</a>
+                                        <a class="button" onclick="plastic()">Platic Vials</a>
                                         <a class="button" onclick="iso()">Isolate Reagents</a>
                                     </div>
                                 </div>
@@ -176,18 +175,13 @@
         document.getElementById("input_code").textContent = outtext;
         document.getElementById("input_code").value = outtext;
     }
-    function charcoal1(){
-        var outtext = char1ex();
+    function charcoal(){
+        var outtext = charex();
         document.getElementById("input_code").textContent = outtext;
         document.getElementById("input_code").value = outtext;
     }
-    function charcoal2(){
-        var outtext = char2ex();
-        document.getElementById("input_code").textContent = outtext;
-        document.getElementById("input_code").value = outtext;
-    }
-    function glass(){
-        var outtext = glassex();
+    function plastic(){
+        var outtext = plasticex();
         document.getElementById("input_code").textContent = outtext;
         document.getElementById("input_code").value = outtext;
     }
